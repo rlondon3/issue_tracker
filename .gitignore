@@ -1,0 +1,42 @@
+# Ignore bundler config
+/.bundle
+
+# Ignore gems
+/vendor/bundle
+*.gem
+
+# Ignore Rails files (if converting to Rails later)
+log/*
+tmp/*
+*.rbc
+*.pid
+*.log
+*.swo
+*.swp
+*.sock
+*.lock
+
+# Ignore SQLite database files
+*.sqlite3
+*.sqlite3-journal
+
+# Ignore environment files
+.env
+.env.*.local
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore editor and IDE files
+.idea/
+*.iml
+.vscode/
+*.swp
+*~
+
+# Ignore compiled binaries and caches
+/.byebug_history
+/coverage
+/doc/
+node_modules/
