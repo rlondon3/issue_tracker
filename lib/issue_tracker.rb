@@ -1,34 +1,45 @@
 require_relative 'issue'
+require_relative 'database'
+
 
 class Issue_Tracker
-    def initialize
+    def initialize(database)
         @issues = []
-        @next_id = 1
+        @db = database
     end
 
     def add_issue(title, description, status="open", priority="medium")
-        issue = Issue.new(id: @next_id, title: title, description: description, status: status, priority: priority)
+        issue = Issue.new(title: title, description: description, status: status, priority: priority)
+        @db.create_issue(issue)
         @issues << issue
-        @next_id += 1
     end
 
     def view_issues
-        if @issues.empty?
+        all_issues = @db.get_issues()
+        if all_issues.empty?
             puts "Currently there are no issues."
         else
-            @issues.each(&:display) #@issues.each { |issue| issue.display }
+            all_issues.each(&:display)
+            #@issues.each(&:display) #@issues.each { |issue| issue.display }
         end
     end
 
     def get_issue_by_id(id)
-        @issues.find { |issue| issue.id == id }
+        issue = @db.get_issue_by_id(id)
+        @issues
+        #@issues.find { |issue| issue.id == id }
     end
 
     def update_issue(id, title = nil, description = nil, status = nil, priority = nil)
         issue = get_issue_by_id(id)
-
+    
         if issue
-            issue.update(title: title, description: description, status: status, priority: priority)
+            issue.title = title if title
+            issue.description = description if description
+            issue.status = status if status
+            issue.priority = priority if priority
+    
+            @db.update_issue(issue)
             puts "Issue with ID #{id} has been updated successfully."
         else
             puts "Issue with Id #{id} not found!"
@@ -36,12 +47,11 @@ class Issue_Tracker
     end
 
     def delete_issue(id)
-        issue = issue.find(id)
-        if issue
-            @issues.delete(issue)
+        if @db.delete_issue(id)
             puts "Issue with ID #{id} has been deleted successfully."
         else
             puts "Issue with ID #{id} not found!"
         end
     end
+    
 end

@@ -1,6 +1,6 @@
 # Issue Tracker
 
-A simple command-line application for tracking issues, built with Ruby and SQLite. This app allows users to create, view, update, and delete issues, making it ideal for managing small tasks or tracking bugs in a straightforward way. 
+A simple command-line application for tracking issues, built with Ruby and SQLite. This app allows users to create, view, update, and delete issues, making it ideal for managing small tasks or tracking bugs in a straightforward way.
 
 ## Features
 
@@ -24,15 +24,18 @@ A simple command-line application for tracking issues, built with Ruby and SQLit
    ```bash
    git clone https://github.com/rlondon3/issue-tracker.git
    cd issue_tracker
+   ```
 2. **Install dependencies**:
    gem install sqlite3
 3. **Run the app**
    ruby app.rb
 
 ### Usage
+
 Follow the prompts to add, view, update, or delete issues.
 
 ### Future Enhancements
+
 - **Refactor** the app with Ruby on Rails for a web-based interface.
 - **Authentication** for multi-user support.
 - **Vue** Front-end.

@@ -1,0 +1,64 @@
+require "sqlite3"
+require_relative 'issue'
+
+class Database
+    def initialize(db_name='issue_tracker.db')
+        @db = SQLite3::Database.new(db_name)
+        setup_tables
+    end
+
+    def setup_tables
+        @db.execute <<-SQL
+            CREATE TABLE IF NOT EXISTS issues (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title VARCHAR(30),
+                description VARCHAR(250),
+                status VARCHAR(20),
+                priority VARCHAR(20),
+                created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+                updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+                due_by DATE
+            )
+        SQL
+    end
+
+    def create_issue(issue)
+        @db.execute("INSERT INTO issues (title, description, status, priority, due_by)
+                    VALUES (?, ?, ?, ?, ?)", [issue.title, issue.description, issue.status, issue.priority])
+        @db.last_insert_row_id
+    end
+
+    def get_issues
+        @db.execute("SELECT * FROM issues").map do |row|
+            Issue.new(id: row[0], title: row[1], description: row[2], status: row[3], priority: row[4])
+        end
+    end
+
+    def get_issue_by_id(id)
+        result = @db.get_first_row('SELECT * FROM issues WHERE id = ?', [id]).first
+        if result
+            Issue.new(id: result[0], title: result[1], description: result[2], status: result[3], priority: result[4])
+        else
+            nil 
+        end
+    end
+
+    def update_issue(issue)
+        updated_at = Time.now.to_s
+        @db.execute("UPDATE issues SET title = COALESCE(?, title), 
+            description = COALESCE(?, description),
+            status = COALESCE(?, status), 
+            priority = COALESCE(?, priority), 
+            due_by = COALESCE(?, due_by), 
+            updated_date = ?
+            WHERE id = ?", 
+            [issue.title, issue.description, issue.status, issue.priority, issue.due_by, updated_at, issue.id])
+    end
+
+    def delete_issue(id)
+        @db.execute('DELETE FROM issues WHERE id = ?', [id])
+    end
+end
+
+
+

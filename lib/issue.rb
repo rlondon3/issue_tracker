@@ -1,8 +1,8 @@
 class Issue
     attr_accessor :id, :title, :description, :status, :priority, :created_at, :updated_at
 
-    def initialize(id:, title:, description:, status: "Open", priority: "medium")
-        @id =  id
+    def initialize(id: nil, title:, description:, status: "Open", priority: "medium")
+        @id = id
         @title = title
         @description = description
         @status = status
@@ -12,7 +12,7 @@ class Issue
     end
 
     def display
-        puts "ID: #{@id}"
+        puts "Id: #{@id}"
         puts "Title: #{@title}"
         puts "Description: #{@description}"
         puts "Status: #{@status}"
@@ -27,5 +27,6 @@ class Issue
         @description = description if @description != @description
         @status = status if @status != @status
         @priority = priority if !priority != @priority
+        @updated_at = Time.now  
     end
 end

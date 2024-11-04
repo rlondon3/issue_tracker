@@ -2,7 +2,9 @@ require_relative 'lib/issue'
 require_relative 'lib/issue_tracker'
 require_relative 'lib/database'
 
-issue_tracker = Issue_Tracker.new
+
+db = Database.new
+issue_tracker = Issue_Tracker.new(db)
 
 loop do
     puts "\nIssue Tracker"
@@ -13,7 +15,7 @@ loop do
     puts "5. Exit"
 
     user_choice = gets.chomp.to_i
-    print " user choice #{user_choice}"
+ 
     case user_choice
     when 1
         puts "Enter issue title: "
@@ -42,7 +44,7 @@ loop do
         puts "Enter new priority: "
         new_priority = gets.chomp
 
-        issue_tracker.update(id, new_title, new_description, new_priority, new_status)
+        issue_tracker.update_issue(id, new_title, new_description, new_priority, new_status)
         puts "Issue added successfully!"
     when 4
         puts "Enter issue ID to delete: "
