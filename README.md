@@ -28,7 +28,7 @@ A simple command-line application for tracking issues, built with Ruby and SQLit
 2. **Install dependencies**:
    gem install sqlite3
 3. **Run the app**
-   ruby app.rb
+   rake app:start
 
 ### Usage
 
