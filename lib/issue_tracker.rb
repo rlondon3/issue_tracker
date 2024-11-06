@@ -1,5 +1,5 @@
 require_relative 'issue'
-require_relative 'database'
+require_relative 'test_database'
 
 
 class Issue_Tracker

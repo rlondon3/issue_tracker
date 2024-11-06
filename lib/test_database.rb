@@ -1,9 +1,12 @@
 require "sqlite3"
+require_relative 'migration'
 require_relative 'issue'
 
 class Database
-    def initialize(db_name='issue_tracker.db')
+    def initialize(db_name='issue_tracker_test.db')
         @db = SQLite3::Database.new(db_name)
+        @migration = Migration.new(db_name)
+        @migration.reset_db 
         setup_tables
     end
 

@@ -1,8 +1,16 @@
 require_relative '../lib/issue_tracker'
 require_relative '../lib/issue'
-require_relative '../lib/database' 
+require_relative '../lib/test_database' 
 
 RSpec.describe Database do
+    before(:each) do
+        @migration = Migration.new
+        @migration.reset_db
+    end
+
+    after(:each) do
+        @migration.reset_db
+    end
   it "initializes with a SQLite3 database" do
     db = Database.new
     issue_tracker = Issue_Tracker.new(db)
@@ -12,6 +20,7 @@ RSpec.describe Database do
   it "gets issues from the database" do
     db = Database.new 
     issue_tracker = Issue_Tracker.new(db)
+    issue_tracker.add_issue("Test", "Test description", "Test status", "Test priority")
 
     db_issues = db.get_issues()
 
@@ -20,19 +29,21 @@ RSpec.describe Database do
   it "gets an issue by id" do
     db = Database.new 
     issue_tracker = Issue_Tracker.new(db)
+    issue_tracker.add_issue("Test", "Test description", "Test status", "Test priority")
 
-    issue = db.get_issue_by_id(5)
+    issue = db.get_issue_by_id(1)
     expect(issue).to be_truthy
   end
   #add test to make sure the issue is being updated
   it "deletes an issue by id" do
     db = Database.new 
     issue_tracker = Issue_Tracker.new(db)
+    issue_tracker.add_issue("Test", "Test description", "Test status", "Test priority")
 
-    issue = db.get_issue_by_id(60)
+    issue = db.get_issue_by_id(1)
     expect(issue).to be_truthy
 
-    db.delete_issue(4)
+    db.delete_issue(1)
     deleted_issue = db.get_issue_by_id(1)
     expect(deleted_issue).to be_nil
   end

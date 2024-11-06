@@ -1,6 +1,6 @@
 require_relative '../lib/issue_tracker'
 require_relative '../lib/issue'
-require_relative '../lib/database' 
+require_relative '../lib/test_database' 
 
 RSpec.describe Issue_Tracker do
   it "initializes with @issues and @db variables" do

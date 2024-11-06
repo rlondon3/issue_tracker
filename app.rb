@@ -1,6 +1,6 @@
 require_relative 'lib/issue'
 require_relative 'lib/issue_tracker'
-require_relative 'lib/database'
+require_relative 'lib/test_database'
 
 
 db = Database.new
