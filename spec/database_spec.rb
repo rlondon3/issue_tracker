@@ -24,6 +24,7 @@ RSpec.describe Database do
     issue = db.get_issue_by_id(5)
     expect(issue).to be_truthy
   end
+  #add test to make sure the issue is being updated
   it "deletes an issue by id" do
     db = Database.new 
     issue_tracker = Issue_Tracker.new(db)
@@ -35,5 +36,4 @@ RSpec.describe Database do
     deleted_issue = db.get_issue_by_id(1)
     expect(deleted_issue).to be_nil
   end
-
 end
