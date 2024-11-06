@@ -11,6 +11,10 @@ class Issue
         @updated_at = Time.now
     end
 
+    def to_s
+        "ID: #{@id}, Title: #{@title}, Description: #{@description}, Status: #{@status}, Priority: #{@priority}"
+    end
+
     def display
         puts "Id: #{@id}"
         puts "Title: #{@title}"

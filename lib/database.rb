@@ -7,6 +7,10 @@ class Database
         setup_tables
     end
 
+    def db
+        @db
+    end
+
     def setup_tables
         @db.execute <<-SQL
             CREATE TABLE IF NOT EXISTS issues (
@@ -29,15 +33,23 @@ class Database
     end
 
     def get_issues
-        @db.execute("SELECT * FROM issues").map do |row|
+        result = @db.execute("SELECT * FROM issues")
+        issues = result.map do |row|
             Issue.new(id: row[0], title: row[1], description: row[2], status: row[3], priority: row[4])
         end
+        issues
     end
 
     def get_issue_by_id(id)
-        result = @db.get_first_row('SELECT * FROM issues WHERE id = ?', [id]).first
+        result = @db.get_first_row('SELECT * FROM issues WHERE id = ?', [id])
         if result
-            Issue.new(id: result[0], title: result[1], description: result[2], status: result[3], priority: result[4])
+            issue = Issue.new(
+                id: result[0], 
+                title: result[1], 
+                description: result[2], 
+                status: result[3], 
+                priority: result[4], 
+            )
         else
             nil 
         end
