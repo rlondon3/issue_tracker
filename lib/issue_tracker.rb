@@ -25,8 +25,13 @@ class Issue_Tracker
     end
 
     def get_issue_by_id(id)
-        issue = @db.get_issue_by_id(id)
-        @issues
+        issue = @issues.find { |i| i.id == id }
+
+        unless issue
+            issue = @db.get_issue_by_id(id)
+            @issues << issue if issue 
+        end
+        issue
         #@issues.find { |issue| issue.id == id }
     end
 
@@ -47,7 +52,10 @@ class Issue_Tracker
     end
 
     def delete_issue(id)
-        if @db.delete_issue(id)
+        issue = get_issue_by_id(id)
+        if issue
+            @db.delete_issue(id)
+            @issues.delete(issue)
             puts "Issue with ID #{id} has been deleted successfully."
         else
             puts "Issue with ID #{id} not found!"
