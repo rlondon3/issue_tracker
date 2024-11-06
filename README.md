@@ -17,6 +17,8 @@ A simple command-line application for tracking issues, built with Ruby and SQLit
 - **Ruby**: Ensure Ruby is installed. [Download Ruby](https://www.ruby-lang.org/en/downloads/)
 - **SQLite3**: Ensure SQLite3 is installed. [SQLite Installation Guide](https://sqlite.org/download.html)
 - **SQLite3 Gem**: Install the `sqlite3` gem.
+- **Rspec**: Ensure Rspec is installed [Rspec Installation Guide](https://rspec.info/documentation/3.13/rspec-core/)
+- **Rspec Gem**: Install the `Rspec` gem.
 
 ### Installation
 
@@ -27,8 +29,12 @@ A simple command-line application for tracking issues, built with Ruby and SQLit
    ```
 2. **Install dependencies**:
    gem install sqlite3
+   gem install rspec
+   gem install rspec-core
 3. **Run the app**
    rake app:start
+4. **Run unit tests**
+   rake app:test
 
 ### Usage
 
