@@ -1,4 +1,4 @@
-# Issue Tracker
+# Issue Tracker [![Ruby](https://github.com/rlondon3/issue_tracker/actions/workflows/ruby.yml/badge.svg)](https://github.com/rlondon3/issue_tracker/actions/workflows/ruby.yml)
 
 A simple command-line application for tracking issues, built with Ruby and SQLite. This app allows users to create, view, update, and delete issues, making it ideal for managing small tasks or tracking bugs in a straightforward way. [Read About My Ruby Journey](https://programmingthestreets.hashnode.dev/grand-hustle-upskillin-with-ruby)
 
