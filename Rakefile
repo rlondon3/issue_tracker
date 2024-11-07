@@ -8,7 +8,7 @@ namespace :app do
 
     desc "Run RSpec tests"
     task :test do
-        sh "bundle exec rspec"
+        sh "bundle exec rspec --format progress --format documentation" 
     end
 end
 

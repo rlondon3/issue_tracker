@@ -35,6 +35,27 @@ RSpec.describe Database do
     expect(issue).to be_truthy
   end
   #add test to make sure the issue is being updated
+  it "updates an issue by id" do
+    db = Database.new
+    issue_tracker = Issue_Tracker.new(db)
+    issue_tracker.add_issue("Test", "Test description", "Test status", "Test priority")
+
+    issue = db.get_issue_by_id(1)
+    if issue
+        issue.title = "updated title"
+        issue.description = "updated description" 
+        issue.status = "updated status" 
+        issue.priority = "updated priority"
+        issue.updated_at = Time.now.to_s
+
+        db.update_issue(1, issue)
+        updated_issue = db.get_issue_by_id(1)
+
+        expect(updated_issue.title).to eq("updated title")
+        expect(updated_issue.description).to eq('updated description')
+    end
+
+  end
   it "deletes an issue by id" do
     db = Database.new 
     issue_tracker = Issue_Tracker.new(db)

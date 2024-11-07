@@ -30,8 +30,8 @@ class Database
     end
 
     def create_issue(issue)
-        @db.execute("INSERT INTO issues (title, description, status, priority, due_by)
-                    VALUES (?, ?, ?, ?, ?)", [issue.title, issue.description, issue.status, issue.priority])
+        @db.execute("INSERT INTO issues (title, description, status, priority)
+                    VALUES (?, ?, ?, ?)", [issue.title, issue.description, issue.status, issue.priority])
         @db.last_insert_row_id
     end
 
@@ -58,16 +58,15 @@ class Database
         end
     end
 
-    def update_issue(issue)
+    def update_issue(id, issue)
         updated_at = Time.now.to_s
         @db.execute("UPDATE issues SET title = COALESCE(?, title), 
             description = COALESCE(?, description),
             status = COALESCE(?, status), 
             priority = COALESCE(?, priority), 
-            due_by = COALESCE(?, due_by), 
-            updated_date = ?
+            updated_date = ? 
             WHERE id = ?", 
-            [issue.title, issue.description, issue.status, issue.priority, issue.due_by, updated_at, issue.id])
+            [issue.title, issue.description, issue.status, issue.priority, updated_at, id])
     end
 
     def delete_issue(id)
