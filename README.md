@@ -44,4 +44,4 @@ Follow the prompts to add, view, update, or delete issues.
 
 - **Refactor** the app with Ruby on Rails for a web-based interface.
 - **Authentication** for multi-user support.
-- **Vue** Front-end.
+- **NextJS** Front-end.

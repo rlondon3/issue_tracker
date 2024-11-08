@@ -1,0 +1,7 @@
+{
+	"dependencies": {
+		"@mui/material-nextjs": "^6.1.6",
+		"@emotion/cache": "^11.13.1",
+		"@emotion/server": "^11.11.0"
+	}
+}
