@@ -30,7 +30,7 @@ class Database
     end
 
     def create_issue(issue)
-        @db.execute("INSERT INTO issues (title, description, status, priority)
+        new_issue = @db.execute("INSERT INTO issues (title, description, status, priority)
                     VALUES (?, ?, ?, ?)", [issue.title, issue.description, issue.status, issue.priority])
         @db.last_insert_row_id
     end

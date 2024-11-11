@@ -1,10 +1,13 @@
-import Image from "next/image";
-import Navigation from "./components/Navigation";
+import Navigation from './components/Navigation';
+import IssueButton from './components/IssueButton';
+import IssueTable from './components/IssueTable';
 
 export default function Home() {
-  return (
-    <div>
-        <Navigation />
-    </div>
-  );
+	return (
+		<div>
+			<Navigation />
+			<IssueTable />
+			<IssueButton />
+		</div>
+	);
 }

@@ -10,14 +10,21 @@ class Issue_Tracker
 
     def add_issue(title, description, status="open", priority="medium")
         issue = Issue.new(title: title, description: description, status: status, priority: priority)
-        @db.create_issue(issue)
-        @issues << issue
+        issue_id = @db.create_issue(issue)
+        if issue_id
+            issue.id = issue_id
+            @issues << issue
+            issue
+        else
+            nil
+        end
     end
 
     def view_issues
-        all_issues = @db.get_issues()
+        all_issues = @db.get_issues() || []
         if all_issues.empty?
             puts "Currently there are no issues."
+            all_issues
         else
             all_issues.each(&:display)
             #@issues.each(&:display) #@issues.each { |issue| issue.display }
