@@ -6,7 +6,6 @@ class Database
     def initialize(db_name='issue_tracker_test.db')
         @db = SQLite3::Database.new(db_name)
         @migration = Migration.new(db_name)
-        @migration.reset_db 
         setup_tables
     end
 

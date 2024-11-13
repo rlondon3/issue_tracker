@@ -42,7 +42,7 @@ class Issue_Tracker
         #@issues.find { |issue| issue.id == id }
     end
 
-    def update_issue(id, title = nil, description = nil, status = nil, priority = nil, due_by = nil)
+    def update_issue(id, title = nil, description = nil, status = nil, priority = nil)
         issue = get_issue_by_id(id)
     
         if issue
@@ -50,12 +50,11 @@ class Issue_Tracker
             issue.description = description if description
             issue.status = status if status
             issue.priority = priority if priority
-            issue.due_by = due_by if due_by
     
             @db.update_issue(id, issue)
-            puts "Issue with ID #{id} has been updated successfully."
+            issue
         else
-            puts "Issue with Id #{id} not found!"
+            nil 
         end
     end
 
@@ -64,9 +63,9 @@ class Issue_Tracker
         if issue
             @db.delete_issue(id)
             @issues.delete(issue)
-            puts "Issue with ID #{id} has been deleted successfully."
+            return true
         else
-            puts "Issue with ID #{id} not found!"
+            nil
         end
     end
     
