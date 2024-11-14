@@ -11,6 +11,8 @@ gem 'puma', '~> 6.4.3'
 
 gem 'rake', '~> 13.0'
 
+gem 'rack-test'
+
 group :development, :test do
     gem 'rspec', '~> 3.11' # Use the latest RSpec stable version instead of fetching directly from Git
 end

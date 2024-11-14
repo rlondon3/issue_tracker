@@ -10,7 +10,7 @@ class Routes < Sinatra::Base
 
     get '/' do
         "Sinatra connected with puma..."
-      end
+    end
 
     get '/issues' do
         issues = issue_tracker.view_issues()
