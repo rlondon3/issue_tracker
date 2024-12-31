@@ -23,16 +23,16 @@ class Issue
         }.to_json
     end
 
-    def display
-        puts "Id: #{@id}"
-        puts "Title: #{@title}"
-        puts "Description: #{@description}"
-        puts "Status: #{@status}"
-        puts "Priority: #{@priority}"
-        puts "Created At: #{@created_at}"
-        puts "Updated At: #{@updated_at}"
-        puts "-" * 20
-    end
+    # def display
+    #     puts "Id: #{@id}"
+    #     puts "Title: #{@title}"
+    #     puts "Description: #{@description}"
+    #     puts "Status: #{@status}"
+    #     puts "Priority: #{@priority}"
+    #     puts "Created At: #{@created_at}"
+    #     puts "Updated At: #{@updated_at}"
+    #     puts "-" * 20
+    # end
     
     def update(title: @title, description: @description, status: @status, priority: @priority)
         @title = title if title != @title
