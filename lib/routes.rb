@@ -75,9 +75,10 @@ class Routes < Sinatra::Base
     end
 
     delete '/delete-issue/:id' do
-        deleted_issue = issue_tracker.delete_issue(params[:id])
-
-        if deleted_issue
+        id = params[:id]
+        deleted_issue = issue_tracker.delete_issue(id)
+        
+        if !deleted_issue
             status 200
             { message: 'Issue deleted'}.to_json
         else

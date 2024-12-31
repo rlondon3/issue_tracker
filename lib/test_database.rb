@@ -36,10 +36,15 @@ class Database
 
     def get_issues
         result = @db.execute("SELECT * FROM issues")
-        issues = result.map do |row|
-            Issue.new(id: row[0], title: row[1], description: row[2], status: row[3], priority: row[4])
+        result.map do |row|
+            Issue.new(
+                id: row[0], 
+                title: row[1], 
+                description: row[2], 
+                status: row[3], 
+                priority: row[4]
+            )
         end
-        issues
     end
 
     def get_issue_by_id(id)
@@ -66,10 +71,25 @@ class Database
             updated_date = ? 
             WHERE id = ?", 
             [issue.title, issue.description, issue.status, issue.priority, updated_at, id])
+
+        result = @db.get_first_row('SELECT * FROM issues WHERE id = ?', [id])
+    
+        if result
+            Issue.new(
+                id: result[0],
+                title: result[1],
+                description: result[2],
+                status: result[3],
+                priority: result[4]
+            )
+        else
+            nil
+        end
     end
 
     def delete_issue(id)
         @db.execute('DELETE FROM issues WHERE id = ?', [id])
+        @db.changes > 0 ? id : nil
     end
 end
 

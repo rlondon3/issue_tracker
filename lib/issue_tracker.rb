@@ -26,7 +26,7 @@ class Issue_Tracker
             puts "Currently there are no issues."
             all_issues
         else
-            all_issues.each(&:display)
+            all_issues
             #@issues.each(&:display) #@issues.each { |issue| issue.display }
         end
     end
@@ -61,9 +61,9 @@ class Issue_Tracker
     def delete_issue(id)
         issue = get_issue_by_id(id)
         if issue
-            @db.delete_issue(id)
             @issues.delete(issue)
-            return true
+            @db.delete_issue(id)
+            print "\n" #strange case: only print/put a new line will allow this to work. i'll need to debug further     
         else
             nil
         end

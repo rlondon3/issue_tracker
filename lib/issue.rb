@@ -11,8 +11,16 @@ class Issue
         @updated_at = Time.now
     end
 
-    def to_s
-        "ID: #{@id}, Title: #{@title}, Description: #{@description}, Status: #{@status}, Priority: #{@priority}"
+    def to_json(*args)
+        {
+          id: @id,
+          title: @title,
+          description: @description,
+          status: @status,
+          priority: @priority,
+          created_at: @created_at,
+          updated_at: @updated_at
+        }.to_json
     end
 
     def display
@@ -27,10 +35,10 @@ class Issue
     end
     
     def update(title: @title, description: @description, status: @status, priority: @priority)
-        @title = title if @title != @title
-        @description = description if @description != @description
-        @status = status if @status != @status
-        @priority = priority if !priority != @priority
+        @title = title if title != @title
+        @description = description if description != @description
+        @status = status if status != @status
+        @priority = priority if priority != @priority  # removed the ! operator
         @updated_at = Time.now  
     end
 end

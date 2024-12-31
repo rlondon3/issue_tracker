@@ -44,7 +44,6 @@ RSpec.describe Routes do
 
   it 'should update an issue' do
     updated_issue_data = {
-        title: "Update Sample Issue",
         description: "This is an updated sample issue description",
         status: "open",
         priority: "high"
@@ -52,12 +51,12 @@ RSpec.describe Routes do
 
     put '/update-issue/3',  updated_issue_data, { "CONTENT_TYPE" => "application/json" }
     response_data = JSON.parse(last_response.body)
+
     expect(last_response.status).to eq(201)
   end
 
   it 'should delete an issue' do
-    delete '/delete-issue/3'
-    response_data = JSON.parse(last_response.body)
+    delete "/delete-issue/3", {}, { "CONTENT_TYPE" => "application/json" }
     expect(last_response.status).to eq(200)
   end
 end
