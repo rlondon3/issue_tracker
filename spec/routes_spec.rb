@@ -6,7 +6,9 @@ require_relative '../lib/test_database'
 RSpec.describe Routes do
   include Rack::Test::Methods
   before(:all) do
-    @migration = Migration.new 
+    @migration = Migration.new
+    Routes.set :environment, :test
+    Routes.set :bind, '0.0.0.0' 
   end
   after(:all) do
     @migration.reset_db
